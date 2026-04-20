@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="KitKing — Premium football jerseys from top clubs and national teams worldwide." />
+  <title>KitKing — Premium Football Jerseys</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>" />
+</head>
+<body>
+  <!-- Announcement bar -->
+  <div class="announce" id="announce">
+    <div class="announce-track">
+      <span>⚡ FREE shipping over $80</span>
+      <span>🏆 Official licensed kits</span>
+      <span>🎽 Custom name &amp; number printing</span>
+      <span>↩️ 30-day returns</span>
+      <span>⚡ FREE shipping over $80</span>
+      <span>🏆 Official licensed kits</span>
+      <span>🎽 Custom name &amp; number printing</span>
+      <span>↩️ 30-day returns</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <button class="icon-btn mobile-only" id="mobileMenuBtn" aria-label="Menu">
+        <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <a href="#" class="logo">
+        <span class="logo-mark">👑</span>
+        <span class="logo-text">KitKing</span>
+      </a>
+      <nav class="nav desktop-only">
+        <a href="#" data-nav="all">Shop All</a>
+        <a href="#" data-nav="new">New Arrivals</a>
+        <a href="#" data-nav="sale">Sale</a>
+        <a href="#" data-nav="clubs">Clubs</a>
+        <a href="#" data-nav="national">National Teams</a>
+        <a href="#" data-nav="retro">Retro</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" id="searchBtn" aria-label="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+        <div class="currency-switch desktop-only">
+          <select id="currencySelect" aria-label="Currency">
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+            <option value="GBP">£ GBP</option>
+            <option value="BDT">৳ BDT</option>
+          </select>
+        </div>
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="icon-btn" id="accountBtn" aria-label="Account">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        </button>
+        <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="badge" id="wishlistBadge">0</span>
+        </button>
+        <button class="icon-btn" id="cartBtn" aria-label="Cart">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+    <!-- Search bar -->
+    <div class="search-bar" id="searchBar">
+      <div class="container">
+        <div class="search-input-wrap">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="searchInput" placeholder="Search teams, players, leagues…" autocomplete="off" />
+          <button class="icon-btn" id="searchClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+        </div>
+        <div class="search-suggestions" id="searchSuggestions"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <button class="icon-btn mobile-close" id="mobileMenuClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <a href="#" data-nav="all">Shop All</a>
+      <a href="#" data-nav="new">New Arrivals</a>
+      <a href="#" data-nav="sale">Sale</a>
+      <a href="#" data-nav="clubs">Clubs</a>
+      <a href="#" data-nav="national">National Teams</a>
+      <a href="#" data-nav="retro">Retro</a>
+      <div class="mobile-currency">
+        <label>Currency</label>
+        <select id="currencySelectMobile">
+          <option value="USD">$ USD</option>
+          <option value="EUR">€ EUR</option>
+          <option value="GBP">£ GBP</option>
+          <option value="BDT">৳ BDT</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide active" style="--grad: linear-gradient(135deg,#dc2626,#7c2d12);">
+        <div class="container hero-content">
+          <span class="hero-tag">New Season 25/26</span>
+          <h1>Wear the <em>legend</em>.<br/>Own the game.</h1>
+          <p>Authentic home &amp; away kits from Europe's elite clubs. Custom printing in 24h.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-shop="all">Shop Now →</button>
+            <button class="btn btn-ghost" data-shop="new">New Arrivals</button>
+          </div>
+        </div>
+        <div class="hero-visual">🏆</div>
+      </div>
+      <div class="hero-slide" style="--grad: linear-gradient(135deg,#1e40af,#0c4a6e);">
+        <div class="container hero-content">
+          <span class="hero-tag">Limited Edition</span>
+          <h1>Retro <em>icons</em>.<br/>Timeless style.</h1>
+          <p>Relive the glory. Classic kits from the 80s, 90s and 2000s, reissued.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-shop="retro">Shop Retro →</button>
+          </div>
+        </div>
+        <div class="hero-visual">⚽</div>
+      </div>
+      <div class="hero-slide" style="--grad: linear-gradient(135deg,#059669,#064e3b);">
+        <div class="container hero-content">
+          <span class="hero-tag">Flash Deal</span>
+          <h1>Up to <em>40% off</em><br/>select kits.</h1>
+          <p>Limited stock. Ends soon. Grab your favourite jersey before it's gone.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-shop="sale">Shop Sale →</button>
+          </div>
+          <div class="countdown" id="countdown">
+            <div><b id="cdD">00</b><span>Days</span></div>
+            <div><b id="cdH">00</b><span>Hrs</span></div>
+            <div><b id="cdM">00</b><span>Min</span></div>
+            <div><b id="cdS">00</b><span>Sec</span></div>
+          </div>
+        </div>
+        <div class="hero-visual">🔥</div>
+      </div>
+    </div>
+    <div class="hero-dots" id="heroDots"></div>
+  </section>
+
+  <!-- Trust strip -->
+  <section class="trust container">
+    <div class="trust-item"><span>🚚</span><div><b>Free Shipping</b><small>Over $80</small></div></div>
+    <div class="trust-item"><span>🔒</span><div><b>Secure Checkout</b><small>SSL encrypted</small></div></div>
+    <div class="trust-item"><span>↩️</span><div><b>Easy Returns</b><small>30-day policy</small></div></div>
+    <div class="trust-item"><span>💬</span><div><b>24/7 Support</b><small>Always here</small></div></div>
+  </section>
+
+  <!-- Leagues -->
+  <section class="container section">
+    <div class="section-head">
+      <h2>Shop by League</h2>
+      <p>Pick your competition</p>
+    </div>
+    <div class="leagues" id="leagues"></div>
+  </section>
+
+  <!-- Featured products with filters -->
+  <section class="container section">
+    <div class="section-head">
+      <h2 id="catalogTitle">All Jerseys</h2>
+      <div class="catalog-controls">
+        <button class="btn btn-ghost filter-toggle" id="filterToggle">
+          <svg viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+          Filters
+        </button>
+        <select id="sortSelect" class="sort-select">
+          <option value="popular">Most Popular</option>
+          <option value="newest">Newest</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="catalog">
+      <aside class="filters" id="filters">
+        <div class="filter-head">
+          <h3>Filters</h3>
+          <button class="link-btn" id="clearFilters">Clear all</button>
+        </div>
+        <div class="filter-group">
+          <h4>League</h4>
+          <div id="filterLeague" class="checks"></div>
+        </div>
+        <div class="filter-group">
+          <h4>Team</h4>
+          <div id="filterTeam" class="checks scroll"></div>
+        </div>
+        <div class="filter-group">
+          <h4>Type</h4>
+          <div id="filterType" class="checks"></div>
+        </div>
+        <div class="filter-group">
+          <h4>Size</h4>
+          <div id="filterSize" class="sizes"></div>
+        </div>
+        <div class="filter-group">
+          <h4>Price Range</h4>
+          <div class="price-range">
+            <input type="range" id="priceRange" min="0" max="200" value="200" />
+            <div class="price-labels"><span>$0</span><span id="priceLabel">$200</span></div>
+          </div>
+        </div>
+        <div class="filter-group">
+          <h4>Rating</h4>
+          <div id="filterRating" class="checks"></div>
+        </div>
+        <div class="filter-group">
+          <label class="check"><input type="checkbox" id="filterSale" /><span>On Sale only</span></label>
+          <label class="check"><input type="checkbox" id="filterStock" /><span>In Stock only</span></label>
+        </div>
+      </aside>
+
+      <div class="catalog-main">
+        <div class="chips" id="activeChips"></div>
+        <div class="grid" id="productGrid"></div>
+        <div class="empty" id="empty" hidden>
+          <div>😕</div>
+          <h3>No jerseys match your filters</h3>
+          <p>Try removing a filter or searching something else.</p>
+          <button class="btn btn-primary" id="clearFilters2">Reset filters</button>
+        </div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recently viewed -->
+  <section class="container section" id="recentSection" hidden>
+    <div class="section-head">
+      <h2>Recently Viewed</h2>
+    </div>
+    <div class="grid grid-slim" id="recentGrid"></div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="container section">
+    <div class="section-head"><h2>What fans say</h2></div>
+    <div class="reviews-wall">
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Quality is unreal. Feels just like the one my player wears."</p><b>— Arif H.</b></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Shipped in 3 days to Dhaka. Print sharp, fit perfect."</p><b>— Mehedi R.</b></div>
+      <div class="review-card"><div class="stars">★★★★☆</div><p>"Love the retro section. Got my '98 France kit finally!"</p><b>— Sadia K.</b></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Custom name printing looks legit. Will buy again."</p><b>— Tanvir A.</b></div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div>
+          <h2>Join the squad</h2>
+          <p>10% off your first order + early access to drops.</p>
+        </div>
+        <form id="newsletterForm" class="newsletter-form">
+          <input type="email" placeholder="your@email.com" required />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="logo"><span class="logo-mark">👑</span><span class="logo-text">KitKing</span></div>
+        <p class="muted">Premium football jerseys, worldwide shipping, custom printing.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Twitter">🐦</a>
+          <a href="#" aria-label="Facebook">👍</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="YouTube">📺</a>
+        </div>
+      </div>
+      <div>
+        <h5>Shop</h5>
+        <a href="#">New Arrivals</a>
+        <a href="#">Best Sellers</a>
+        <a href="#">Sale</a>
+        <a href="#">Retro</a>
+        <a href="#">Gift Cards</a>
+      </div>
+      <div>
+        <h5>Help</h5>
+        <a href="#">Size Guide</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">Track Order</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Affiliates</a>
+        <a href="#">Contact</a>
+      </div>
+      <div>
+        <h5>Payments</h5>
+        <div class="pays">
+          <span>VISA</span><span>MC</span><span>AMEX</span><span>PayPal</span><span>Apple Pay</span><span>bKash</span>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small>© 2026 KitKing. All rights reserved.</small>
+      <small><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Cookies</a></small>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div class="drawer" id="cartDrawer">
+    <div class="drawer-head">
+      <h3>Your Cart <span id="cartCountLabel">(0)</span></h3>
+      <button class="icon-btn" data-close="cartDrawer"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="drawer-body" id="cartItems"></div>
+    <div class="drawer-foot" id="cartFoot">
+      <div class="row"><span>Subtotal</span><b id="cartSubtotal">$0.00</b></div>
+      <div class="row muted small"><span>Shipping calculated at checkout</span></div>
+      <button class="btn btn-primary btn-block" id="checkoutBtn">Checkout →</button>
+      <button class="btn btn-ghost btn-block" data-close="cartDrawer">Continue shopping</button>
+    </div>
+  </div>
+
+  <!-- Wishlist Drawer -->
+  <div class="drawer" id="wishlistDrawer">
+    <div class="drawer-head">
+      <h3>Wishlist</h3>
+      <button class="icon-btn" data-close="wishlistDrawer"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="drawer-body" id="wishlistItems"></div>
+  </div>
+
+  <!-- Backdrop -->
+  <div class="backdrop" id="backdrop"></div>
+
+  <!-- Product Modal -->
+  <div class="modal" id="productModal">
+    <div class="modal-inner product-modal" id="productModalInner"></div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="modal" id="checkoutModal">
+    <div class="modal-inner checkout-modal">
+      <div class="checkout-head">
+        <h3>Secure Checkout</h3>
+        <button class="icon-btn" data-close="checkoutModal"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="stepper" id="stepper">
+        <div class="step active" data-step="1"><span>1</span>Shipping</div>
+        <div class="step" data-step="2"><span>2</span>Payment</div>
+        <div class="step" data-step="3"><span>3</span>Review</div>
+      </div>
+      <div class="checkout-body" id="checkoutBody"></div>
+    </div>
+  </div>
+
+  <!-- Account Modal -->
+  <div class="modal" id="accountModal">
+    <div class="modal-inner account-modal">
+      <div class="checkout-head">
+        <h3 id="accountTitle">Sign in</h3>
+        <button class="icon-btn" data-close="accountModal"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div id="accountBody"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <!-- Back to top -->
+  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+  <!-- Chat widget -->
+  <div class="chat-widget" id="chatWidget">
+    <button class="chat-toggle" id="chatToggle" aria-label="Chat">💬<span class="chat-dot"></span></button>
+    <div class="chat-panel" id="chatPanel">
+      <div class="chat-head">
+        <div><b>KitKing Support</b><small>Typically replies in minutes</small></div>
+        <button class="icon-btn" id="chatClose"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <form class="chat-input" id="chatForm">
+        <input type="text" id="chatInputField" placeholder="Type a message…" />
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cookie banner -->
+  <div class="cookie" id="cookie">
+    <span>🍪 We use cookies to make your shopping better. <a href="#">Learn more</a></span>
+    <button class="btn btn-primary" id="cookieAccept">Accept</button>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
