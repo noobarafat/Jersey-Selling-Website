@@ -3,26 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="KitKing — Premium football jerseys from top clubs and national teams worldwide." />
-  <title>KitKing — Premium Football Jerseys</title>
+  <meta name="description" content="KITKING — Premium football jerseys. Authentic kits from top clubs and national teams." />
+  <meta name="theme-color" content="#0b0b0f" />
+  <title>KITKING — Premium Football Jerseys</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect width=%2224%22 height=%2224%22 fill=%22%230b0b0f%22/><text x=%2212%22 y=%2216%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-weight=%22900%22 font-size=%2212%22 fill=%22%23fff%22>K</text></svg>" />
 </head>
 <body>
   <!-- Announcement bar -->
-  <div class="announce" id="announce">
-    <div class="announce-track">
-      <span>⚡ FREE shipping over $80</span>
-      <span>🏆 Official licensed kits</span>
-      <span>🎽 Custom name &amp; number printing</span>
-      <span>↩️ 30-day returns</span>
-      <span>⚡ FREE shipping over $80</span>
-      <span>🏆 Official licensed kits</span>
-      <span>🎽 Custom name &amp; number printing</span>
-      <span>↩️ 30-day returns</span>
+  <div class="announce">
+    <div class="container announce-inner">
+      <span>Free shipping over $80</span>
+      <span class="sep">·</span>
+      <span>Custom printing in 24h</span>
+      <span class="sep">·</span>
+      <span>30-day returns</span>
     </div>
   </div>
 
@@ -32,16 +30,16 @@
       <button class="icon-btn mobile-only" id="mobileMenuBtn" aria-label="Menu">
         <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
-      <a href="#" class="logo">
-        <span class="logo-mark">👑</span>
-        <span class="logo-text">KitKing</span>
+      <a href="#" class="logo" aria-label="KITKING">
+        <span class="logo-mark">K</span>
+        <span class="logo-text">KITKING</span>
       </a>
       <nav class="nav desktop-only">
-        <a href="#" data-nav="all">Shop All</a>
-        <a href="#" data-nav="new">New Arrivals</a>
+        <a href="#" data-nav="all">Shop</a>
+        <a href="#" data-nav="new">New</a>
         <a href="#" data-nav="sale">Sale</a>
         <a href="#" data-nav="clubs">Clubs</a>
-        <a href="#" data-nav="national">National Teams</a>
+        <a href="#" data-nav="national">National</a>
         <a href="#" data-nav="retro">Retro</a>
       </nav>
       <div class="header-actions">
@@ -50,10 +48,10 @@
         </button>
         <div class="currency-switch desktop-only">
           <select id="currencySelect" aria-label="Currency">
-            <option value="USD">$ USD</option>
-            <option value="EUR">€ EUR</option>
-            <option value="GBP">£ GBP</option>
-            <option value="BDT">৳ BDT</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="BDT">BDT</option>
           </select>
         </div>
         <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
@@ -90,19 +88,19 @@
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-inner">
       <button class="icon-btn mobile-close" id="mobileMenuClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-      <a href="#" data-nav="all">Shop All</a>
-      <a href="#" data-nav="new">New Arrivals</a>
+      <a href="#" data-nav="all">Shop</a>
+      <a href="#" data-nav="new">New</a>
       <a href="#" data-nav="sale">Sale</a>
       <a href="#" data-nav="clubs">Clubs</a>
-      <a href="#" data-nav="national">National Teams</a>
+      <a href="#" data-nav="national">National</a>
       <a href="#" data-nav="retro">Retro</a>
       <div class="mobile-currency">
         <label>Currency</label>
         <select id="currencySelectMobile">
-          <option value="USD">$ USD</option>
-          <option value="EUR">€ EUR</option>
-          <option value="GBP">£ GBP</option>
-          <option value="BDT">৳ BDT</option>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="GBP">GBP</option>
+          <option value="BDT">BDT</option>
         </select>
       </div>
     </div>
@@ -111,45 +109,42 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-slides" id="heroSlides">
-      <div class="hero-slide active" style="--grad: linear-gradient(135deg,#dc2626,#7c2d12);">
+      <div class="hero-slide active" data-bg="#0b0b0f">
         <div class="container hero-content">
-          <span class="hero-tag">New Season 25/26</span>
-          <h1>Wear the <em>legend</em>.<br/>Own the game.</h1>
-          <p>Authentic home &amp; away kits from Europe's elite clubs. Custom printing in 24h.</p>
+          <span class="hero-tag">Season 25 / 26</span>
+          <h1>Wear the<br/><em>legend</em>.</h1>
+          <p>Authentic home and away kits from Europe's elite. Custom printing in 24 hours.</p>
           <div class="hero-actions">
-            <button class="btn btn-primary" data-shop="all">Shop Now →</button>
-            <button class="btn btn-ghost" data-shop="new">New Arrivals</button>
+            <button class="btn btn-primary" data-shop="all">Shop collection</button>
+            <button class="btn btn-ghost" data-shop="new">New arrivals</button>
           </div>
         </div>
-        <div class="hero-visual">🏆</div>
       </div>
-      <div class="hero-slide" style="--grad: linear-gradient(135deg,#1e40af,#0c4a6e);">
+      <div class="hero-slide" data-bg="#1a1a1f">
         <div class="container hero-content">
           <span class="hero-tag">Limited Edition</span>
-          <h1>Retro <em>icons</em>.<br/>Timeless style.</h1>
+          <h1>Retro<br/><em>icons</em>.</h1>
           <p>Relive the glory. Classic kits from the 80s, 90s and 2000s, reissued.</p>
           <div class="hero-actions">
-            <button class="btn btn-primary" data-shop="retro">Shop Retro →</button>
+            <button class="btn btn-primary" data-shop="retro">Shop retro</button>
           </div>
         </div>
-        <div class="hero-visual">⚽</div>
       </div>
-      <div class="hero-slide" style="--grad: linear-gradient(135deg,#059669,#064e3b);">
+      <div class="hero-slide" data-bg="#121316">
         <div class="container hero-content">
           <span class="hero-tag">Flash Deal</span>
           <h1>Up to <em>40% off</em><br/>select kits.</h1>
-          <p>Limited stock. Ends soon. Grab your favourite jersey before it's gone.</p>
+          <p>Limited stock. Ends soon.</p>
           <div class="hero-actions">
-            <button class="btn btn-primary" data-shop="sale">Shop Sale →</button>
+            <button class="btn btn-primary" data-shop="sale">Shop sale</button>
           </div>
           <div class="countdown" id="countdown">
             <div><b id="cdD">00</b><span>Days</span></div>
-            <div><b id="cdH">00</b><span>Hrs</span></div>
+            <div><b id="cdH">00</b><span>Hours</span></div>
             <div><b id="cdM">00</b><span>Min</span></div>
             <div><b id="cdS">00</b><span>Sec</span></div>
           </div>
         </div>
-        <div class="hero-visual">🔥</div>
       </div>
     </div>
     <div class="hero-dots" id="heroDots"></div>
@@ -157,36 +152,38 @@
 
   <!-- Trust strip -->
   <section class="trust container">
-    <div class="trust-item"><span>🚚</span><div><b>Free Shipping</b><small>Over $80</small></div></div>
-    <div class="trust-item"><span>🔒</span><div><b>Secure Checkout</b><small>SSL encrypted</small></div></div>
-    <div class="trust-item"><span>↩️</span><div><b>Easy Returns</b><small>30-day policy</small></div></div>
-    <div class="trust-item"><span>💬</span><div><b>24/7 Support</b><small>Always here</small></div></div>
+    <div class="trust-item"><b>Free Shipping</b><small>On orders over $80</small></div>
+    <div class="trust-item"><b>Secure Checkout</b><small>SSL encrypted</small></div>
+    <div class="trust-item"><b>Easy Returns</b><small>30-day policy</small></div>
+    <div class="trust-item"><b>Always Support</b><small>24/7 service</small></div>
   </section>
 
   <!-- Leagues -->
   <section class="container section">
     <div class="section-head">
-      <h2>Shop by League</h2>
-      <p>Pick your competition</p>
+      <div>
+        <div class="eyebrow">Collections</div>
+        <h2>Shop by league</h2>
+      </div>
     </div>
     <div class="leagues" id="leagues"></div>
   </section>
 
-  <!-- Featured products with filters -->
+  <!-- Catalog -->
   <section class="container section">
     <div class="section-head">
-      <h2 id="catalogTitle">All Jerseys</h2>
+      <div>
+        <div class="eyebrow">Catalog</div>
+        <h2 id="catalogTitle">All jerseys</h2>
+      </div>
       <div class="catalog-controls">
-        <button class="btn btn-ghost filter-toggle" id="filterToggle">
-          <svg viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
-          Filters
-        </button>
+        <button class="btn btn-ghost btn-sm filter-toggle" id="filterToggle">Filters</button>
         <select id="sortSelect" class="sort-select">
-          <option value="popular">Most Popular</option>
+          <option value="popular">Most popular</option>
           <option value="newest">Newest</option>
-          <option value="price-asc">Price: Low to High</option>
-          <option value="price-desc">Price: High to Low</option>
-          <option value="rating">Top Rated</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="rating">Top rated</option>
         </select>
       </div>
     </div>
@@ -214,7 +211,7 @@
           <div id="filterSize" class="sizes"></div>
         </div>
         <div class="filter-group">
-          <h4>Price Range</h4>
+          <h4>Price</h4>
           <div class="price-range">
             <input type="range" id="priceRange" min="0" max="200" value="200" />
             <div class="price-labels"><span>$0</span><span id="priceLabel">$200</span></div>
@@ -225,8 +222,8 @@
           <div id="filterRating" class="checks"></div>
         </div>
         <div class="filter-group">
-          <label class="check"><input type="checkbox" id="filterSale" /><span>On Sale only</span></label>
-          <label class="check"><input type="checkbox" id="filterStock" /><span>In Stock only</span></label>
+          <label class="check"><input type="checkbox" id="filterSale" /><span>On sale only</span></label>
+          <label class="check"><input type="checkbox" id="filterStock" /><span>In stock only</span></label>
         </div>
       </aside>
 
@@ -234,7 +231,6 @@
         <div class="chips" id="activeChips"></div>
         <div class="grid" id="productGrid"></div>
         <div class="empty" id="empty" hidden>
-          <div>😕</div>
           <h3>No jerseys match your filters</h3>
           <p>Try removing a filter or searching something else.</p>
           <button class="btn btn-primary" id="clearFilters2">Reset filters</button>
@@ -246,20 +242,18 @@
 
   <!-- Recently viewed -->
   <section class="container section" id="recentSection" hidden>
-    <div class="section-head">
-      <h2>Recently Viewed</h2>
-    </div>
+    <div class="section-head"><div><div class="eyebrow">Your history</div><h2>Recently viewed</h2></div></div>
     <div class="grid grid-slim" id="recentGrid"></div>
   </section>
 
   <!-- Testimonials -->
   <section class="container section">
-    <div class="section-head"><h2>What fans say</h2></div>
+    <div class="section-head"><div><div class="eyebrow">Reviews</div><h2>What fans say</h2></div></div>
     <div class="reviews-wall">
-      <div class="review-card"><div class="stars">★★★★★</div><p>"Quality is unreal. Feels just like the one my player wears."</p><b>— Arif H.</b></div>
-      <div class="review-card"><div class="stars">★★★★★</div><p>"Shipped in 3 days to Dhaka. Print sharp, fit perfect."</p><b>— Mehedi R.</b></div>
-      <div class="review-card"><div class="stars">★★★★☆</div><p>"Love the retro section. Got my '98 France kit finally!"</p><b>— Sadia K.</b></div>
-      <div class="review-card"><div class="stars">★★★★★</div><p>"Custom name printing looks legit. Will buy again."</p><b>— Tanvir A.</b></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Quality is unreal. Feels just like the one my player wears."</p><b>Arif H.</b><small>Verified buyer</small></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Shipped in 3 days to Dhaka. Print sharp, fit perfect."</p><b>Mehedi R.</b><small>Verified buyer</small></div>
+      <div class="review-card"><div class="stars">★★★★☆</div><p>"Love the retro section. Got my '98 France kit finally."</p><b>Sadia K.</b><small>Verified buyer</small></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p>"Custom name printing looks legit. Will buy again."</p><b>Tanvir A.</b><small>Verified buyer</small></div>
     </div>
   </section>
 
@@ -268,8 +262,9 @@
     <div class="container">
       <div class="newsletter-inner">
         <div>
-          <h2>Join the squad</h2>
-          <p>10% off your first order + early access to drops.</p>
+          <div class="eyebrow light">Newsletter</div>
+          <h2>Join the squad.</h2>
+          <p>10% off your first order and early access to drops.</p>
         </div>
         <form id="newsletterForm" class="newsletter-form">
           <input type="email" placeholder="your@email.com" required />
@@ -283,30 +278,23 @@
   <footer class="footer">
     <div class="container footer-grid">
       <div>
-        <div class="logo"><span class="logo-mark">👑</span><span class="logo-text">KitKing</span></div>
-        <p class="muted">Premium football jerseys, worldwide shipping, custom printing.</p>
-        <div class="socials">
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="Twitter">🐦</a>
-          <a href="#" aria-label="Facebook">👍</a>
-          <a href="#" aria-label="TikTok">🎵</a>
-          <a href="#" aria-label="YouTube">📺</a>
-        </div>
+        <div class="logo"><span class="logo-mark">K</span><span class="logo-text">KITKING</span></div>
+        <p class="muted small">Premium football jerseys, worldwide shipping, custom printing.</p>
       </div>
       <div>
         <h5>Shop</h5>
-        <a href="#">New Arrivals</a>
-        <a href="#">Best Sellers</a>
+        <a href="#">New arrivals</a>
+        <a href="#">Best sellers</a>
         <a href="#">Sale</a>
         <a href="#">Retro</a>
-        <a href="#">Gift Cards</a>
+        <a href="#">Gift cards</a>
       </div>
       <div>
         <h5>Help</h5>
-        <a href="#">Size Guide</a>
+        <a href="#">Size guide</a>
         <a href="#">Shipping</a>
         <a href="#">Returns</a>
-        <a href="#">Track Order</a>
+        <a href="#">Track order</a>
         <a href="#">FAQ</a>
       </div>
       <div>
@@ -314,18 +302,18 @@
         <a href="#">About</a>
         <a href="#">Careers</a>
         <a href="#">Press</a>
-        <a href="#">Affiliates</a>
         <a href="#">Contact</a>
       </div>
       <div>
-        <h5>Payments</h5>
-        <div class="pays">
-          <span>VISA</span><span>MC</span><span>AMEX</span><span>PayPal</span><span>Apple Pay</span><span>bKash</span>
-        </div>
+        <h5>Follow</h5>
+        <a href="#">Instagram</a>
+        <a href="#">Twitter / X</a>
+        <a href="#">Facebook</a>
+        <a href="#">YouTube</a>
       </div>
     </div>
     <div class="container footer-bottom">
-      <small>© 2026 KitKing. All rights reserved.</small>
+      <small>© 2026 KITKING. All rights reserved.</small>
       <small><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Cookies</a></small>
     </div>
   </footer>
@@ -333,14 +321,14 @@
   <!-- Cart Drawer -->
   <div class="drawer" id="cartDrawer">
     <div class="drawer-head">
-      <h3>Your Cart <span id="cartCountLabel">(0)</span></h3>
+      <h3>Cart <span id="cartCountLabel" class="muted">(0)</span></h3>
       <button class="icon-btn" data-close="cartDrawer"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     </div>
     <div class="drawer-body" id="cartItems"></div>
     <div class="drawer-foot" id="cartFoot">
       <div class="row"><span>Subtotal</span><b id="cartSubtotal">$0.00</b></div>
       <div class="row muted small"><span>Shipping calculated at checkout</span></div>
-      <button class="btn btn-primary btn-block" id="checkoutBtn">Checkout →</button>
+      <button class="btn btn-primary btn-block" id="checkoutBtn">Checkout</button>
       <button class="btn btn-ghost btn-block" data-close="cartDrawer">Continue shopping</button>
     </div>
   </div>
@@ -366,7 +354,7 @@
   <div class="modal" id="checkoutModal">
     <div class="modal-inner checkout-modal">
       <div class="checkout-head">
-        <h3>Secure Checkout</h3>
+        <h3>Checkout</h3>
         <button class="icon-btn" data-close="checkoutModal"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
       </div>
       <div class="stepper" id="stepper">
@@ -393,28 +381,32 @@
   <div class="toast-wrap" id="toastWrap"></div>
 
   <!-- Back to top -->
-  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+  <button class="back-top" id="backTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
 
   <!-- Chat widget -->
   <div class="chat-widget" id="chatWidget">
-    <button class="chat-toggle" id="chatToggle" aria-label="Chat">💬<span class="chat-dot"></span></button>
+    <button class="chat-toggle" id="chatToggle" aria-label="Chat">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
     <div class="chat-panel" id="chatPanel">
       <div class="chat-head">
-        <div><b>KitKing Support</b><small>Typically replies in minutes</small></div>
+        <div><b>KITKING Support</b><small>Typically replies in minutes</small></div>
         <button class="icon-btn" id="chatClose"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
       </div>
       <div class="chat-messages" id="chatMessages"></div>
       <form class="chat-input" id="chatForm">
         <input type="text" id="chatInputField" placeholder="Type a message…" />
-        <button class="btn btn-primary" type="submit">Send</button>
+        <button class="btn btn-primary btn-sm" type="submit">Send</button>
       </form>
     </div>
   </div>
 
   <!-- Cookie banner -->
   <div class="cookie" id="cookie">
-    <span>🍪 We use cookies to make your shopping better. <a href="#">Learn more</a></span>
-    <button class="btn btn-primary" id="cookieAccept">Accept</button>
+    <span>We use cookies to improve your experience. <a href="#">Learn more</a></span>
+    <button class="btn btn-sm btn-primary" id="cookieAccept">Accept</button>
   </div>
 
   <script src="js/data.js"></script>

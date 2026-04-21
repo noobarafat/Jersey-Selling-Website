@@ -126,8 +126,15 @@ $("#currencySelectMobile").addEventListener("change", e => { state.currency = e.
   LEAGUES.forEach(l => {
     const card = document.createElement("div");
     card.className = "league-card";
-    card.style.background = l.grad;
-    card.innerHTML = `<span class="emoji">${l.emoji}</span><span>${l.name}</span>`;
+    card.innerHTML = `
+      <div>
+        <div class="league-abbr">${l.abbr}</div>
+        <div style="font-size:.72rem;color:var(--fg-3);margin-top:6px;letter-spacing:.14em;text-transform:uppercase">${l.country}</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;width:100%">
+        <div class="league-name">${l.name}</div>
+        <div class="league-arrow">→</div>
+      </div>`;
     card.addEventListener("click", () => {
       state.filters.league = new Set([l.id]);
       renderFilters();
@@ -146,7 +153,7 @@ function renderFilters() {
   lw.innerHTML = LEAGUES.map(l => `
     <label class="check">
       <input type="checkbox" data-filter="league" value="${l.id}" ${state.filters.league.has(l.id) ? "checked" : ""}/>
-      <span>${l.emoji} ${l.name}</span>
+      <span>${l.name}</span>
     </label>`).join("");
 
   // Teams (unique, sorted)
@@ -296,12 +303,11 @@ function renderChips() {
 /* ---------- Product card ---------- */
 function cardHTML(p) {
   const badges = [];
-  if (p.isNew)   badges.push(`<span class="card-badge badge-new">NEW</span>`);
-  if (p.sale)    badges.push(`<span class="card-badge badge-sale">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>`);
-  if (p.isHot)   badges.push(`<span class="card-badge badge-hot">HOT</span>`);
-  if (p.type === "retro") badges.push(`<span class="card-badge badge-retro">RETRO</span>`);
+  if (p.sale)    badges.push(`<span class="card-badge badge-sale">−${Math.round((1-p.price/p.oldPrice)*100)}%</span>`);
+  else if (p.isNew) badges.push(`<span class="card-badge badge-new">New</span>`);
+  else if (p.isHot) badges.push(`<span class="card-badge badge-hot">Trending</span>`);
+  if (p.type === "retro") badges.push(`<span class="card-badge badge-retro">Retro</span>`);
   const wished = state.wishlist.includes(p.id);
-  const stars = "★".repeat(Math.round(p.rating)) + "☆".repeat(5 - Math.round(p.rating));
   return `
     <article class="card" data-id="${p.id}">
       <div class="card-media">
@@ -311,19 +317,19 @@ function cardHTML(p) {
         </button>
         <div class="jersey">${jerseySVG(p.colors)}</div>
         <div class="card-quick">
-          <button data-act="quick">Quick View</button>
-          <button data-act="add">Add to Cart</button>
+          <button data-act="add">Add to bag</button>
+          <button data-act="quick">Quick view</button>
         </div>
       </div>
       <div class="card-body">
-        <div class="card-league">${LEAGUES.find(l=>l.id===p.league)?.name || ""} · ${p.team}</div>
+        <div class="card-league">${p.team}</div>
         <div class="card-name">${p.name}</div>
         <div class="card-meta">
           <div class="card-price">
             ${p.oldPrice ? `<s>${fmtPrice(p.oldPrice)}</s>` : ""}
             <b>${fmtPrice(p.price)}</b>
           </div>
-          <div class="card-rating"><span class="star">★</span>${p.rating} <span>(${p.reviewCount})</span></div>
+          <div class="card-rating"><span class="star">★</span>${p.rating}<span>(${p.reviewCount})</span></div>
         </div>
       </div>
     </article>`;
@@ -348,7 +354,7 @@ function renderProducts() {
     $("#empty").hidden = true;
     // skeleton flash
     grid.innerHTML = Array.from({length: pageList.length}).map(() =>
-      `<div class="card"><div class="skeleton" style="aspect-ratio:1"></div><div class="card-body"><div class="skeleton" style="height:12px;margin-bottom:6px"></div><div class="skeleton" style="height:16px;width:70%"></div></div></div>`
+      `<div class="card"><div class="skeleton" style="aspect-ratio:4/5"></div><div class="card-body"><div class="skeleton" style="height:10px;margin-bottom:8px;margin-top:12px"></div><div class="skeleton" style="height:14px;width:70%"></div></div></div>`
     ).join("");
     setTimeout(() => {
       grid.innerHTML = pageList.map(cardHTML).join("");
@@ -511,15 +517,15 @@ function openProduct(id) {
       <div class="pm-info">
         <div class="sub">${LEAGUES.find(l=>l.id===p.league)?.name || ""} · ${p.team}</div>
         <h2>${p.name}</h2>
-        <div class="card-rating"><span class="star">★</span><b>${p.rating}</b> <span class="muted">· ${p.reviewCount} reviews</span></div>
+        <div class="card-rating" style="margin-top:6px"><span class="star">★</span><b>${p.rating}</b> <span class="muted">· ${p.reviewCount} reviews · In stock</span></div>
         <div class="pm-price">
           ${p.oldPrice ? `<s>${fmtPrice(p.oldPrice)}</s>` : ""}
           ${fmtPrice(p.price)}
-          ${savePct ? `<span class="save">SAVE ${savePct}%</span>` : ""}
+          ${savePct ? `<span class="save">Save ${savePct}%</span>` : ""}
         </div>
-        <p class="muted">Authentic ${p.type} jersey. Breathable Dri-FIT fabric, heat-transfer club crest, 100% recycled polyester.</p>
+        <p class="desc">Authentic ${p.type} jersey. Breathable Dri-FIT fabric with heat-transfer club crest. 100% recycled polyester.</p>
 
-        <h4>Size <a class="link-btn" style="float:right" data-size-guide>Size guide</a></h4>
+        <h4>Size <a class="link-btn" data-size-guide>Size guide</a></h4>
         <div class="pm-options" id="pmSizes">
           ${p.sizes.map(s => `<button class="size-chip ${s==='M'?'active':''}" data-ps="${s}">${s}</button>`).join("")}
         </div>
@@ -531,26 +537,29 @@ function openProduct(id) {
             <input type="number" id="pmQty" value="1" min="1" max="${p.stock}"/>
             <button data-qty="+1">+</button>
           </div>
-          <button class="btn btn-primary" id="pmAdd">Add to Cart — ${fmtPrice(p.price)}</button>
-          <button class="icon-btn ${state.wishlist.includes(p.id) ? "active" : ""}" id="pmWish" aria-label="Wishlist" style="background:var(--bg-2);border:1px solid var(--border);border-radius:12px;width:48px;height:48px">
+          <button class="btn btn-primary" id="pmAdd">Add to bag · ${fmtPrice(p.price)}</button>
+          <button class="icon-btn ${state.wishlist.includes(p.id) ? "active" : ""}" id="pmWish" aria-label="Wishlist">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
         </div>
 
         <div class="pm-custom">
-          <b style="font-size:.9rem">🎽 Customize your jersey (+$12)</b>
-          <div class="pm-custom-row" style="margin-top:10px">
+          <div class="pm-custom-head">
+            <span>Customize</span>
+            <span class="muted small">+$12</span>
+          </div>
+          <div class="pm-custom-row">
             <div><label>Name</label><input type="text" id="pmName" maxlength="10" placeholder="YOUR NAME"/></div>
             <div><label>Number</label><input type="number" id="pmNum" maxlength="2" min="0" max="99" placeholder="10"/></div>
           </div>
-          <div class="pm-custom-note">Live preview updates above. Official fonts included.</div>
+          <div class="pm-custom-note">Live preview updates on the jersey. Official fonts applied at print.</div>
         </div>
 
         <ul class="feats">
-          <li>Free shipping over $80</li>
+          <li>Free shipping on orders over $80</li>
           <li>30-day free returns</li>
-          <li>Ships in 24 hours</li>
-          <li>Official licensed product</li>
+          <li>Ships within 24 hours</li>
+          <li>Officially licensed product</li>
         </ul>
 
         <div class="pm-reviews">
@@ -660,7 +669,7 @@ function renderCart() {
   $("#cartCountLabel").textContent = `(${count})`;
 
   if (!state.cart.length) {
-    items.innerHTML = `<div class="empty-drawer"><div>🛒</div><h3>Your cart is empty</h3><p class="muted">Start adding some gear!</p></div>`;
+    items.innerHTML = `<div class="empty-drawer"><h3>Your bag is empty</h3><p>Add something you love.</p></div>`;
     $("#cartFoot").style.display = "none";
     return;
   }
@@ -674,14 +683,14 @@ function renderCart() {
         <div>
           <b>${p.name}</b>
           <small>Size ${c.size}${c.name || c.num ? ` · ${c.name}${c.num?" #"+c.num:""}` : ""}</small>
-          <small><b>${fmtPrice(p.price + extra)}</b></small>
-          <div class="qty" style="margin-top:6px">
+          <span class="ci-price">${fmtPrice(p.price + extra)}</span>
+          <div class="qty">
             <button data-ck="${c.key}" data-cq="-1">−</button>
             <input value="${c.qty}" readonly/>
             <button data-ck="${c.key}" data-cq="+1">+</button>
           </div>
         </div>
-        <button class="x" data-rm="${c.key}">✕</button>
+        <button class="x" data-rm="${c.key}" aria-label="Remove">✕</button>
       </div>`;
   }).join("");
   $("#cartSubtotal").textContent = fmtPrice(cartSubtotal());
@@ -704,7 +713,7 @@ function toggleWishlist(id) {
     toast(`Removed from wishlist`);
   } else {
     state.wishlist.push(id);
-    toast(`Added to wishlist ❤️`, "success");
+    toast(`Saved to wishlist`, "success");
   }
   save("kk:wishlist", state.wishlist);
   renderWishlist();
@@ -717,7 +726,7 @@ function renderWishlist() {
   $("#wishlistBadge").textContent = state.wishlist.length;
   $("#wishlistBadge").toggleAttribute("data-empty", state.wishlist.length === 0);
   if (!state.wishlist.length) {
-    wrap.innerHTML = `<div class="empty-drawer"><div>❤️</div><h3>Wishlist empty</h3><p class="muted">Tap the heart on any jersey to save it.</p></div>`;
+    wrap.innerHTML = `<div class="empty-drawer"><h3>No saved items</h3><p>Tap the heart on any jersey to save it here.</p></div>`;
     return;
   }
   wrap.innerHTML = state.wishlist.map(id => {
@@ -825,19 +834,19 @@ function renderCheckout() {
       <div class="pay-methods" style="margin-top:16px">
         <label class="pay-method ${state.checkout.payment==='card'?'active':''}">
           <input type="radio" name="pay" value="card" ${state.checkout.payment==='card'?'checked':''}/>
-          <div><b>💳 Credit / Debit Card</b><br/><small class="muted">Visa, Mastercard, Amex</small></div>
+          <div><b>Credit / Debit Card</b><br/><small>Visa, Mastercard, Amex</small></div>
         </label>
         <label class="pay-method ${state.checkout.payment==='paypal'?'active':''}">
           <input type="radio" name="pay" value="paypal" ${state.checkout.payment==='paypal'?'checked':''}/>
-          <div><b>🅿️ PayPal</b><br/><small class="muted">Pay with your PayPal account</small></div>
+          <div><b>PayPal</b><br/><small>Pay with your PayPal account</small></div>
         </label>
         <label class="pay-method ${state.checkout.payment==='bkash'?'active':''}">
           <input type="radio" name="pay" value="bkash" ${state.checkout.payment==='bkash'?'checked':''}/>
-          <div><b>📱 bKash</b><br/><small class="muted">Mobile banking (Bangladesh)</small></div>
+          <div><b>bKash</b><br/><small>Mobile banking (Bangladesh)</small></div>
         </label>
         <label class="pay-method ${state.checkout.payment==='cod'?'active':''}">
           <input type="radio" name="pay" value="cod" ${state.checkout.payment==='cod'?'checked':''}/>
-          <div><b>💵 Cash on Delivery</b><br/><small class="muted">Pay when you receive (+$2)</small></div>
+          <div><b>Cash on Delivery</b><br/><small>Pay when you receive (+$2)</small></div>
         </label>
       </div>
       <div id="cardFields" style="margin-top:16px; ${state.checkout.payment==='card' ? '' : 'display:none'}">
@@ -927,10 +936,10 @@ function openAccount() {
           <div><b>${state.user.name}</b><br/><small class="muted">${state.user.email}</small></div>
         </div>
         <div style="display:grid;gap:8px">
-          <button class="btn btn-ghost btn-block">📦 My Orders</button>
-          <button class="btn btn-ghost btn-block">📍 Addresses</button>
-          <button class="btn btn-ghost btn-block">❤️ Wishlist (${state.wishlist.length})</button>
-          <button class="btn btn-ghost btn-block">⚙️ Settings</button>
+          <button class="btn btn-ghost btn-block">My orders</button>
+          <button class="btn btn-ghost btn-block">Addresses</button>
+          <button class="btn btn-ghost btn-block">Wishlist (${state.wishlist.length})</button>
+          <button class="btn btn-ghost btn-block">Settings</button>
           <button class="btn btn-brand btn-block" id="logoutBtn">Sign out</button>
         </div>
       </div>`;
@@ -1004,7 +1013,7 @@ function bindAccForm() {
 $("#newsletterForm").addEventListener("submit", e => {
   e.preventDefault();
   const email = e.target.querySelector("input").value;
-  toast(`Subscribed ${email} ✨`, "success");
+  toast(`Subscribed ${email}`, "success");
   e.target.reset();
 });
 
@@ -1019,12 +1028,12 @@ back.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth
 const chatPanel = $("#chatPanel");
 const chatMsgs = $("#chatMessages");
 const botReplies = [
-  "Hi! 👋 How can I help? Try asking about shipping, sizes, or returns.",
+  "Hi, how can we help? Ask about shipping, sizes, or returns.",
   "Shipping is free over $80 — otherwise $9.99. Delivery 3–5 business days.",
-  "We offer easy 30-day returns on unworn jerseys with original tags.",
-  "Size runs true. If between sizes, we recommend sizing up.",
-  "Custom name + number printing adds $12 and ships within 24 hours.",
-  "All our jerseys are 100% authentic, officially licensed products.",
+  "Easy 30-day returns on unworn jerseys with original tags.",
+  "Sizing runs true. If between sizes, we recommend sizing up.",
+  "Custom name and number printing adds $12 and ships within 24 hours.",
+  "All jerseys are 100% authentic, officially licensed products.",
 ];
 let botIdx = 0;
 function botMsg(text) {

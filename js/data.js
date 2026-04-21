@@ -4,12 +4,12 @@
    ============================================================ */
 
 const LEAGUES = [
-  { id: "premier",    name: "Premier League",      emoji: "🏴",  grad: "linear-gradient(135deg,#3d1a78,#1a0a3a)" },
-  { id: "laliga",     name: "La Liga",             emoji: "🇪🇸", grad: "linear-gradient(135deg,#ee8737,#b11226)" },
-  { id: "bundesliga", name: "Bundesliga",          emoji: "🇩🇪", grad: "linear-gradient(135deg,#d20515,#000000)" },
-  { id: "seriea",     name: "Serie A",             emoji: "🇮🇹", grad: "linear-gradient(135deg,#008fd7,#004a99)" },
-  { id: "ligue1",     name: "Ligue 1",             emoji: "🇫🇷", grad: "linear-gradient(135deg,#091c3e,#dc2626)" },
-  { id: "national",   name: "National Teams",      emoji: "🌍",  grad: "linear-gradient(135deg,#16a34a,#052e16)" },
+  { id: "premier",    name: "Premier League",  abbr: "EPL",  country: "England" },
+  { id: "laliga",     name: "La Liga",         abbr: "LIGA", country: "Spain" },
+  { id: "bundesliga", name: "Bundesliga",      abbr: "BUND", country: "Germany" },
+  { id: "seriea",     name: "Serie A",         abbr: "SERA", country: "Italy" },
+  { id: "ligue1",     name: "Ligue 1",         abbr: "LIG1", country: "France" },
+  { id: "national",   name: "National Teams",  abbr: "NAT",  country: "International" },
 ];
 
 const TYPES = [
