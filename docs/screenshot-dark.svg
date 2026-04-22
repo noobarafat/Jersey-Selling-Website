@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img">
+  <rect width="1200" height="800" fill="#0e0e10"/>
+  <!-- Announce -->
+  <rect x="0" y="0" width="1200" height="32" fill="#000"/>
+  <text x="600" y="20" text-anchor="middle" font-family="Arial" font-size="11" fill="#f3f2ee" letter-spacing="1.5">Free shipping over $80  ·  Custom printing in 24h  ·  30-day returns</text>
+  <!-- Header -->
+  <rect x="0" y="32" width="1200" height="64" fill="#0e0e10"/>
+  <line x1="0" y1="96" x2="1200" y2="96" stroke="#262629"/>
+  <rect x="60" y="51" width="26" height="26" fill="#f3f2ee"/>
+  <text x="73" y="70" text-anchor="middle" font-family="Georgia" font-size="15" font-weight="800" fill="#0e0e10">K</text>
+  <text x="96" y="70" font-family="Arial" font-size="13" font-weight="800" fill="#f3f2ee" letter-spacing="4">KITKING</text>
+  <g font-family="Arial" font-size="12" fill="#c7c7cc">
+    <text x="220" y="70">Shop</text>
+    <text x="275" y="70">New</text>
+    <text x="325" y="70">Sale</text>
+    <text x="370" y="70">Clubs</text>
+    <text x="425" y="70">National</text>
+    <text x="495" y="70">Retro</text>
+  </g>
+  <!-- Icons -->
+  <g fill="none" stroke="#f3f2ee" stroke-width="1.4">
+    <circle cx="1020" cy="64" r="5"/><line x1="1024" y1="68" x2="1028" y2="72"/>
+    <text x="1050" y="68" font-family="Arial" font-size="10" font-weight="600" fill="#c7c7cc">USD</text>
+    <path d="M1085 60 a4 4 0 1 0 8 4"/>
+    <circle cx="1120" cy="60" r="3"/><path d="M1115 72 a5 5 0 0 1 10 0"/>
+    <path d="M1145 60 l-5 6 5 5 5-5z"/>
+    <path d="M1165 58 l-4 4 12 -12 2 2 -12 12 -2 -2"/>
+  </g>
+  <!-- Hero -->
+  <rect x="0" y="96" width="1200" height="480" fill="#0b0b0f"/>
+  <rect x="0" y="96" width="1200" height="480" fill="#161618" opacity="0.5"/>
+  <rect x="60" y="140" width="100" height="22" rx="11" fill="none" stroke="#3a3a42"/>
+  <text x="110" y="155" text-anchor="middle" font-family="Arial" font-size="9" font-weight="600" fill="#f3f2ee" letter-spacing="2">SEASON 25/26</text>
+  <text x="60" y="260" font-family="Georgia" font-size="80" font-weight="400" fill="#f3f2ee">Wear the</text>
+  <text x="60" y="340" font-family="Georgia" font-size="80" font-weight="400" font-style="italic" fill="#c9a861">legend.</text>
+  <text x="60" y="390" font-family="Arial" font-size="14" fill="#c7c7cc">Authentic home and away kits from Europe's elite.</text>
+  <text x="60" y="410" font-family="Arial" font-size="14" fill="#c7c7cc">Custom printing in 24 hours.</text>
+  <rect x="60" y="440" width="180" height="44" fill="#f3f2ee"/>
+  <text x="150" y="467" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#0b0b0f" letter-spacing="1.5">SHOP COLLECTION</text>
+  <rect x="250" y="440" width="180" height="44" fill="none" stroke="#f3f2ee"/>
+  <text x="340" y="467" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#f3f2ee" letter-spacing="1.5">NEW ARRIVALS</text>
+  <g transform="translate(860 150) scale(1.1)">
+    <path d="M50 30 L80 20 Q110 10 140 20 L170 30 L230 60 L210 120 L200 110 L200 300 Q110 320 20 300 L20 110 L10 120 L-10 60 Z" fill="#0f2f5e" stroke="#c9a861" stroke-width="2"/>
+    <path d="M80 20 Q110 45 140 20" fill="none" stroke="#c9a861" stroke-width="3"/>
+    <text x="110" y="195" text-anchor="middle" font-family="Georgia" font-size="110" font-weight="900" fill="#c9a861">7</text>
+  </g>
+  <rect x="560" y="550" width="44" height="2" fill="#fff"/>
+  <rect x="610" y="550" width="28" height="2" fill="#555"/>
+  <rect x="644" y="550" width="28" height="2" fill="#555"/>
+  <!-- Trust -->
+  <g font-family="Arial">
+    <text x="120" y="620" font-size="12" font-weight="600" fill="#f3f2ee">Free Shipping</text>
+    <text x="120" y="636" font-size="11" fill="#8a8a92">On orders over $80</text>
+    <line x1="340" y1="600" x2="340" y2="650" stroke="#262629"/>
+    <text x="400" y="620" font-size="12" font-weight="600" fill="#f3f2ee">Secure Checkout</text>
+    <text x="400" y="636" font-size="11" fill="#8a8a92">SSL encrypted</text>
+    <line x1="620" y1="600" x2="620" y2="650" stroke="#262629"/>
+    <text x="680" y="620" font-size="12" font-weight="600" fill="#f3f2ee">Easy Returns</text>
+    <text x="680" y="636" font-size="11" fill="#8a8a92">30-day policy</text>
+    <line x1="900" y1="600" x2="900" y2="650" stroke="#262629"/>
+    <text x="960" y="620" font-size="12" font-weight="600" fill="#f3f2ee">Always Support</text>
+    <text x="960" y="636" font-size="11" fill="#8a8a92">24/7 service</text>
+  </g>
+  <line x1="0" y1="676" x2="1200" y2="676" stroke="#262629"/>
+  <text x="60" y="720" font-family="Arial" font-size="9" fill="#8a8a92" letter-spacing="3" font-weight="600">COLLECTIONS</text>
+  <text x="60" y="760" font-family="Georgia" font-size="36" fill="#f3f2ee">Shop by league</text>
+
+  <g>
+    <rect x="800" y="700" width="80" height="96" fill="#15151a" stroke="#262629"/>
+    <text x="812" y="730" font-family="Georgia" font-size="22" font-weight="400" fill="#f3f2ee">EPL</text>
+    <text x="812" y="780" font-family="Arial" font-size="8" font-weight="600" fill="#f3f2ee" letter-spacing="1">PREMIER</text>
+    <rect x="885" y="700" width="80" height="96" fill="#15151a" stroke="#262629"/>
+    <text x="897" y="730" font-family="Georgia" font-size="22" font-weight="400" fill="#f3f2ee">LIGA</text>
+    <text x="897" y="780" font-family="Arial" font-size="8" font-weight="600" fill="#f3f2ee" letter-spacing="1">LA LIGA</text>
+    <rect x="970" y="700" width="80" height="96" fill="#15151a" stroke="#262629"/>
+    <text x="980" y="730" font-family="Georgia" font-size="22" font-weight="400" fill="#f3f2ee">BUND</text>
+    <text x="982" y="780" font-family="Arial" font-size="8" font-weight="600" fill="#f3f2ee" letter-spacing="1">GERMANY</text>
+    <rect x="1055" y="700" width="80" height="96" fill="#15151a" stroke="#262629"/>
+    <text x="1065" y="730" font-family="Georgia" font-size="22" font-weight="400" fill="#f3f2ee">SERA</text>
+    <text x="1068" y="780" font-family="Arial" font-size="8" font-weight="600" fill="#f3f2ee" letter-spacing="1">ITALY</text>
+  </g>
+</svg>
