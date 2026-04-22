@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="KITKING — Premium football jerseys. Authentic kits from top clubs and national teams." />
   <meta name="theme-color" content="#0b0b0f" />
+  <link rel="manifest" href="manifest.json" />
   <title>KITKING — Premium Football Jerseys</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,6 +14,9 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect width=%2224%22 height=%2224%22 fill=%22%230b0b0f%22/><text x=%2212%22 y=%2216%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-weight=%22900%22 font-size=%2212%22 fill=%22%23fff%22>K</text></svg>" />
 </head>
 <body>
+  <!-- Scroll progress -->
+  <div class="progress-bar" id="progressBar"></div>
+
   <!-- Announcement bar -->
   <div class="announce">
     <div class="container announce-inner">
@@ -147,8 +151,24 @@
         </div>
       </div>
     </div>
+    <div class="hero-stage" id="heroStage"></div>
     <div class="hero-dots" id="heroDots"></div>
+    <div class="hero-bottom-bar">
+      <div class="container hero-bottom-inner">
+        <div><span class="num">32+</span><span class="lbl">Teams</span></div>
+        <div><span class="num">24h</span><span class="lbl">Print & Ship</span></div>
+        <div><span class="num">50K+</span><span class="lbl">Happy fans</span></div>
+        <div><span class="num">4.9★</span><span class="lbl">Rating</span></div>
+      </div>
+    </div>
   </section>
+
+  <!-- Brand marquee -->
+  <div class="brand-marquee">
+    <div class="container">
+      <div class="brand-track" id="brandTrack"></div>
+    </div>
+  </div>
 
   <!-- Trust strip -->
   <section class="trust container">
@@ -240,6 +260,32 @@
     </div>
   </section>
 
+  <!-- Featured story -->
+  <section class="story reveal">
+    <div class="story-visual">
+      <div class="jersey" id="storyJersey"></div>
+      <div class="story-visual-text">The<br/><em>icons</em>.</div>
+    </div>
+    <div class="story-copy">
+      <div class="eyebrow">Featured</div>
+      <h2>Retro drops that defined an era.</h2>
+      <p>Relive the glory of the 90s and 2000s. Officially licensed reissues of the kits that made history — built from authentic templates, with modern fabric technology underneath.</p>
+      <button class="btn btn-primary" data-shop="retro">Shop retro collection</button>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid reveal-stagger">
+        <div class="stat-item"><div class="stat-num" data-count="50000">0</div><div class="stat-lbl">Fans served</div></div>
+        <div class="stat-item"><div class="stat-num" data-count="52">0</div><div class="stat-lbl">Countries shipped</div></div>
+        <div class="stat-item"><div class="stat-num" data-count="120">0</div><div class="stat-lbl">Authentic teams</div></div>
+        <div class="stat-item"><div class="stat-num" data-count="98">0</div><div class="stat-lbl">% 5-star reviews</div></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Recently viewed -->
   <section class="container section" id="recentSection" hidden>
     <div class="section-head"><div><div class="eyebrow">Your history</div><h2>Recently viewed</h2></div></div>
@@ -294,7 +340,7 @@
         <a href="#">Size guide</a>
         <a href="#">Shipping</a>
         <a href="#">Returns</a>
-        <a href="#">Track order</a>
+        <a href="#" id="trackOrderLink">Track order</a>
         <a href="#">FAQ</a>
       </div>
       <div>
@@ -374,6 +420,73 @@
         <button class="icon-btn" data-close="accountModal"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
       </div>
       <div id="accountBody"></div>
+    </div>
+  </div>
+
+  <!-- Compare bar -->
+  <div class="compare-bar" id="compareBar">
+    <div class="cb-lbl">
+      <b>Compare</b>
+      <small id="compareCount">0 items</small>
+    </div>
+    <div class="thumbs" id="compareThumbs"></div>
+    <button class="btn btn-sm" id="compareOpen" style="background:#fff;color:#000">Compare</button>
+    <button class="icon-btn" id="compareClear" style="color:#fff"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+
+  <!-- Size Guide Modal -->
+  <div class="modal" id="sizeGuideModal">
+    <div class="modal-inner size-guide-modal">
+      <div class="checkout-head">
+        <h3>Size Guide</h3>
+        <button class="icon-btn" data-close="sizeGuideModal"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="checkout-body">
+        <p class="muted small">Measurements in inches. Fit runs true to size. Between sizes? Size up.</p>
+        <table class="size-table">
+          <thead>
+            <tr><th>Size</th><th>Chest</th><th>Waist</th><th>Length</th><th>EU</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>XS</b></td><td>34-36</td><td>28-30</td><td>27</td><td>44</td></tr>
+            <tr><td><b>S</b></td><td>36-38</td><td>30-32</td><td>28</td><td>46</td></tr>
+            <tr><td><b>M</b></td><td>38-40</td><td>32-34</td><td>29</td><td>48</td></tr>
+            <tr><td><b>L</b></td><td>40-42</td><td>34-36</td><td>30</td><td>50</td></tr>
+            <tr><td><b>XL</b></td><td>42-44</td><td>36-38</td><td>31</td><td>52</td></tr>
+            <tr><td><b>XXL</b></td><td>44-46</td><td>38-40</td><td>32</td><td>54</td></tr>
+          </tbody>
+        </table>
+        <p class="muted small" style="margin-top:18px">Not sure? Our support team is one click away via chat.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compare Modal -->
+  <div class="modal" id="compareModal">
+    <div class="modal-inner compare-modal">
+      <div class="checkout-head">
+        <h3>Compare Jerseys</h3>
+        <button class="icon-btn" data-close="compareModal"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="checkout-body" id="compareBody"></div>
+    </div>
+  </div>
+
+  <!-- Order Tracking Modal -->
+  <div class="modal" id="trackModal">
+    <div class="modal-inner" style="max-width:560px">
+      <div class="checkout-head">
+        <h3>Track Your Order</h3>
+        <button class="icon-btn" data-close="trackModal"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="checkout-body">
+        <div class="form-field full">
+          <label>Order number</label>
+          <input id="trackInput" placeholder="KK-XXXXXXXX"/>
+        </div>
+        <button class="btn btn-primary btn-block" id="trackBtn" style="margin-top:14px">Track order</button>
+        <div id="trackResult"></div>
+      </div>
     </div>
   </div>
 

@@ -1092,3 +1092,272 @@ document.addEventListener("keydown", e => {
     $("#searchInput").focus();
   }
 });
+
+/* ---------- Scroll progress bar ---------- */
+(() => {
+  const bar = $("#progressBar");
+  if (!bar) return;
+  const update = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    bar.style.width = pct + "%";
+  };
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+})();
+
+/* ---------- Reveal on scroll ---------- */
+(() => {
+  if (!("IntersectionObserver" in window)) {
+    $$(".reveal, .reveal-stagger").forEach(el => el.classList.add("in"));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add("in");
+        if (en.target.classList.contains("stats-grid")) animateCounters(en.target);
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  $$(".reveal, .reveal-stagger, .stats-grid").forEach(el => io.observe(el));
+})();
+
+/* ---------- Stats counters ---------- */
+function animateCounters(root) {
+  $$(".stat-num", root).forEach(el => {
+    const target = Number(el.dataset.count) || 0;
+    const dur = 1400;
+    const start = performance.now();
+    const fmt = n => n >= 1000 ? (n/1000).toFixed(n >= 10000 ? 0 : 1) + "k" : String(n);
+    const tick = now => {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const v = Math.round(target * eased);
+      el.textContent = fmt(v);
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = fmt(target);
+    };
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ---------- Hero stage floating jerseys ---------- */
+(() => {
+  const stage = $("#heroStage");
+  if (!stage) return;
+  const picks = PRODUCTS.filter(p => p.isHot || p.isNew).slice(0, 3);
+  const pool = picks.length === 3 ? picks : PRODUCTS.slice(0, 3);
+  stage.innerHTML = `
+    <div class="hero-jersey side-l">${jerseySVG(pool[1].colors)}</div>
+    <div class="hero-jersey main">${jerseySVG(pool[0].colors)}</div>
+    <div class="hero-jersey side-r">${jerseySVG(pool[2].colors)}</div>
+  `;
+})();
+
+/* ---------- Story jersey ---------- */
+(() => {
+  const el = $("#storyJersey");
+  if (!el) return;
+  const retro = PRODUCTS.find(p => p.type === "retro") || PRODUCTS[0];
+  el.innerHTML = jerseySVG(retro.colors);
+})();
+
+/* ---------- Brand marquee ---------- */
+(() => {
+  const track = $("#brandTrack");
+  if (!track) return;
+  const teams = [...new Set(PRODUCTS.map(p => p.team))].slice(0, 12);
+  const row = teams.map(t => `<span class="brand-item">${t}</span>`).join("");
+  track.innerHTML = row + row;
+})();
+
+/* ---------- Service worker ---------- */
+if ("serviceWorker" in navigator && location.protocol !== "file:") {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+
+/* ---------- Size guide trigger ---------- */
+document.addEventListener("click", e => {
+  if (e.target.closest("[data-size-guide]")) {
+    e.preventDefault();
+    openModal("sizeGuideModal");
+  }
+});
+
+/* ---------- Compare feature ---------- */
+state.compare = new Set();
+function renderCompareBar() {
+  const bar = $("#compareBar");
+  const n = state.compare.size;
+  $("#compareCount").textContent = `${n} item${n===1?"":"s"}`;
+  bar.classList.toggle("show", n > 0);
+  const thumbs = $("#compareThumbs");
+  thumbs.innerHTML = [...state.compare].map(id => {
+    const p = byId(id); if (!p) return "";
+    return `<div class="cmp-thumb" title="${p.name}" data-rmc="${id}">${jerseySVG(p.colors)}</div>`;
+  }).join("");
+}
+function toggleCompare(id) {
+  if (state.compare.has(id)) state.compare.delete(id);
+  else {
+    if (state.compare.size >= 4) { toast("Compare max 4", "error"); return; }
+    state.compare.add(id);
+  }
+  renderCompareBar();
+  $$(`.card[data-id="${id}"] .card-compare-chk`).forEach(b => b.classList.toggle("active", state.compare.has(id)));
+}
+$("#productGrid").addEventListener("click", e => {
+  const chk = e.target.closest(".card-compare-chk");
+  if (!chk) return;
+  e.stopPropagation();
+  const id = Number(chk.closest(".card").dataset.id);
+  toggleCompare(id);
+});
+$("#compareThumbs").addEventListener("click", e => {
+  const t = e.target.closest("[data-rmc]");
+  if (t) toggleCompare(Number(t.dataset.rmc));
+});
+$("#compareClear").addEventListener("click", () => {
+  const ids = [...state.compare];
+  state.compare.clear();
+  renderCompareBar();
+  ids.forEach(id => $$(`.card[data-id="${id}"] .card-compare-chk`).forEach(b => b.classList.remove("active")));
+});
+$("#compareOpen").addEventListener("click", () => {
+  if (!state.compare.size) return;
+  const items = [...state.compare].map(byId).filter(Boolean);
+  const rows = [
+    ["Team", p => p.team],
+    ["League", p => LEAGUES.find(l=>l.id===p.league)?.name || p.league],
+    ["Type", p => TYPES.find(t=>t.id===p.type)?.name || p.type],
+    ["Price", p => `<b>${fmtPrice(p.price)}</b>${p.oldPrice?` <s class="muted small">${fmtPrice(p.oldPrice)}</s>`:""}`],
+    ["Rating", p => `★ ${p.rating} <span class="muted small">(${p.reviewCount})</span>`],
+    ["Stock", p => p.stock > 0 ? `${p.stock} available` : "Out of stock"],
+    ["Sizes", p => p.sizes.join(", ")],
+  ];
+  $("#compareBody").innerHTML = `
+    <table class="compare-table">
+      <thead><tr><th></th>${items.map(p => `<th><div class="cmp-head"><div class="cmp-jersey">${jerseySVG(p.colors)}</div><b>${p.name}</b></div></th>`).join("")}</tr></thead>
+      <tbody>
+        ${rows.map(([lbl, fn]) => `<tr><th>${lbl}</th>${items.map(p => `<td>${fn(p)}</td>`).join("")}</tr>`).join("")}
+        <tr><th></th>${items.map(p => `<td><button class="btn btn-sm btn-primary" data-cmp-add="${p.id}">Add to bag</button></td>`).join("")}</tr>
+      </tbody>
+    </table>`;
+  openModal("compareModal");
+});
+$("#compareBody").addEventListener("click", e => {
+  const t = e.target.closest("[data-cmp-add]");
+  if (t) addToCart(Number(t.dataset.cmpAdd));
+});
+
+/* Inject compare checkbox into cards after render */
+const _origRender = renderProducts;
+renderProducts = function() {
+  _origRender.apply(this, arguments);
+  setTimeout(() => {
+    $$("#productGrid .card, #recentGrid .card").forEach(card => {
+      if ($(".card-compare-chk", card)) return;
+      const id = Number(card.dataset.id);
+      const btn = document.createElement("button");
+      btn.className = "card-compare-chk" + (state.compare.has(id) ? " active" : "");
+      btn.setAttribute("aria-label", "Compare");
+      btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12"/></svg>`;
+      $(".card-media", card)?.appendChild(btn);
+    });
+  }, 160);
+};
+renderProducts();
+
+/* ---------- Order tracking ---------- */
+$("#trackOrderLink")?.addEventListener("click", e => {
+  e.preventDefault();
+  $("#trackResult").innerHTML = "";
+  $("#trackInput").value = "";
+  openModal("trackModal");
+});
+$("#trackBtn")?.addEventListener("click", () => {
+  const v = $("#trackInput").value.trim();
+  if (!v) return toast("Enter order number", "error");
+  const steps = ["Ordered", "Processing", "Shipped", "Out for delivery", "Delivered"];
+  const at = 2 + Math.floor(Math.random() * 2);
+  $("#trackResult").innerHTML = `
+    <div class="tracker">
+      <b>Order ${v.toUpperCase()}</b>
+      <p class="muted small">Estimated delivery: 3–5 business days</p>
+      <div class="track-steps">
+        ${steps.map((s,i) => `<div class="${i<at?"done":""} ${i===at?"active":""}"><span class="dot">${i<at?"✓":""}</span>${s}</div>`).join("")}
+      </div>
+    </div>`;
+});
+
+/* ---------- Promo code + share (hook into existing flows) ---------- */
+const PROMOS = { KITKING10: 0.10, WELCOME15: 0.15, FAN20: 0.20 };
+state.promo = null;
+
+const _origOrderSummary = orderSummaryHTML;
+orderSummaryHTML = function(sub, ship, tax, total) {
+  const disc = state.promo ? sub * PROMOS[state.promo] : 0;
+  const adjTotal = total - disc;
+  return `
+    <div class="promo">
+      <label class="small muted">Promo code</label>
+      <div style="display:flex;gap:8px;margin-top:6px">
+        <input id="promoInput" placeholder="KITKING10" value="${state.promo||''}" style="flex:1;padding:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:6px"/>
+        <button class="btn btn-sm btn-ghost" id="promoApply">Apply</button>
+      </div>
+      ${state.promo ? `<small style="color:var(--ok,#2b7a4b)">✓ ${state.promo} — ${Math.round(PROMOS[state.promo]*100)}% off</small>` : ""}
+    </div>
+    <div class="order-summary">
+      <div class="row"><span>Subtotal</span><span>${fmtPrice(sub)}</span></div>
+      ${disc ? `<div class="row"><span>Discount</span><span>−${fmtPrice(disc)}</span></div>` : ""}
+      <div class="row"><span>Shipping</span><span>${ship === 0 ? "FREE" : fmtPrice(ship)}</span></div>
+      <div class="row"><span>Tax (8%)</span><span>${fmtPrice(tax)}</span></div>
+      <div class="row total"><span>Total</span><span>${fmtPrice(adjTotal)}</span></div>
+    </div>`;
+};
+document.addEventListener("click", e => {
+  if (e.target.id === "promoApply") {
+    const v = $("#promoInput").value.trim().toUpperCase();
+    if (!v) { state.promo = null; toast("Promo cleared"); renderCheckout(); return; }
+    if (PROMOS[v]) { state.promo = v; toast(`${v} applied — ${Math.round(PROMOS[v]*100)}% off`, "success"); renderCheckout(); }
+    else toast("Invalid promo code", "error");
+  }
+});
+
+/* Clear promo after order */
+const _origPlace = placeOrder;
+placeOrder = function() {
+  _origPlace.apply(this, arguments);
+  state.promo = null;
+};
+
+/* ---------- Share button (wire into product modal) ---------- */
+const _origBindPM = bindProductModal;
+bindProductModal = function() {
+  _origBindPM.apply(this, arguments);
+  const actions = $(".pm-actions");
+  if (actions && !$("#pmShare")) {
+    const btn = document.createElement("button");
+    btn.id = "pmShare";
+    btn.className = "icon-btn";
+    btn.setAttribute("aria-label", "Share");
+    btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>`;
+    btn.addEventListener("click", async () => {
+      const p = currentProduct;
+      const url = location.href.split("#")[0] + "#p=" + p.id;
+      const data = { title: `${p.name} — KITKING`, text: `Check out ${p.name} on KITKING`, url };
+      if (navigator.share) {
+        try { await navigator.share(data); } catch {}
+      } else {
+        try { await navigator.clipboard.writeText(url); toast("Link copied", "success"); }
+        catch { toast(url); }
+      }
+    });
+    actions.appendChild(btn);
+  }
+};
